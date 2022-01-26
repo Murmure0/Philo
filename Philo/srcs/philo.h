@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 16:10:42 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/25 11:42:42 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:09:02 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,19 @@ t_philo			init_philo_st(t_arg *arg, int i);
 /* basics utils */
 int				isnum(int n);
 unsigned int	ft_atoi(const char *str);
+int free_all(int i, t_arg *arg, t_philo *philo_st, pthread_t *philo_th);
+
+/* routine */
+
+void *routine(void *data);
+int death(t_philo *philo_st);
+int my_printf(t_philo *philo_st, char *str);
+void *routine_one(void *data);
+
+/* time */
+
 unsigned int	my_get_time(void);
 unsigned int reel_time(unsigned int time);
-int free_all(int i, t_arg *arg, t_philo *philo_st, pthread_t *philo_th);
+// int my_usleep(unsigned int time_to);
+int my_usleep(t_philo *philo_st, unsigned int time_to);
 #endif

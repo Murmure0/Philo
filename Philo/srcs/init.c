@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 10:14:46 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/27 12:57:36 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/01/27 16:52:13 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	check_arg(int argc, char **argv)
 		printf("Wrong argument number : enter 4 or 5 numbers.\n");
 		return (-1);
 	}
-	while(argv[++i])
+	while (argv[++i])
 	{
 		j = -1;
-		while(argv[i][++j])
+		while (argv[i][++j])
 		{
 			if (!isnum(argv[i][j]))
 			{
@@ -38,13 +38,10 @@ int	check_arg(int argc, char **argv)
 	return (0);
 }
 
-t_arg *init_arg(int argc, char ** argv)
-{	int		i;
-	t_arg *arg;
+void	inside_init_arg(int argc, char **argv, t_arg *arg)
+{
+	int		i;
 
-	arg = malloc(sizeof(t_arg));
-	if (!arg)
-		return (NULL);
 	i = 0;
 	while (++i < argc)
 	{
@@ -61,6 +58,16 @@ t_arg *init_arg(int argc, char ** argv)
 		else if (i == 4)
 			arg->nb_meal = 0;
 	}
+}
+
+t_arg	*init_arg(int argc, char **argv)
+{
+	t_arg	*arg;
+
+	arg = malloc(sizeof(t_arg));
+	if (!arg)
+		return (NULL);
+	inside_init_arg(argc, argv, arg);
 	arg->start = my_get_time();
 	arg->nb_meal_ok = 0;
 	arg->dead_philo = 0;
@@ -73,17 +80,17 @@ int	check_struct(t_arg *arg)
 {
 	if (arg->nb_philo == 0 || arg->nb_philo > 200)
 	{
-		printf("Wrong number of philosoph, enter between 1 and 200 philo please.\n");
+		printf("Number of philosophers must be between 1 and 200.\n");
 		return (-1);
 	}
-	if (arg->time_to_die > 10000 || arg->time_to_eat > 10000 
-	|| arg->time_to_sleep > 10000)
+	if (arg->time_to_die > 10000 || arg->time_to_eat > 10000
+		|| arg->time_to_sleep > 10000)
 	{
 		printf("Please enter a correct amount of time.\n");
 		return (-1);
 	}
-	else if (arg->time_to_die < 60 || arg->time_to_eat < 60 
-	|| arg->time_to_sleep < 60)
+	else if (arg->time_to_die < 60 || arg->time_to_eat < 60
+		|| arg->time_to_sleep < 60)
 	{
 		printf("You're trying to test under 60ms, dont't do that please.\n");
 		return (-1);
@@ -91,9 +98,10 @@ int	check_struct(t_arg *arg)
 	return (0);
 }
 
-t_philo init_philo_st(t_arg *arg, int i)
+t_philo	init_philo_st(t_arg *arg, int i)
 {
-	t_philo philo_st;
+	t_philo	philo_st;
+
 	philo_st.arg = arg;
 	philo_st.num_philo = i + 1;
 	philo_st.last_meal = 0;

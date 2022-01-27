@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 10:29:11 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/27 12:57:42 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/01/27 16:56:10 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ unsigned int	ft_atoi(const char *str)
 
 int	isnum(int n)
 {
-	if (n < '0'|| n > '9')
+	if (n < '0' || n > '9')
 		return (0);
 	return (1);
 }
 
-
-int free_all(int i, t_arg *arg, t_philo *philo_st, pthread_t *philo_th)
+int	free_all(int i, t_arg *arg, t_philo *philo_st, pthread_t *philo_th)
 {
 	if (i == 0)
 		free(arg);
@@ -51,10 +50,9 @@ int free_all(int i, t_arg *arg, t_philo *philo_st, pthread_t *philo_th)
 	else if (i == 2)
 	{
 		free(arg);
-	//	free(fork);
 		philo_st->arg = NULL;
 		philo_st->fork = NULL;
 		free(philo_st);
 	}
 	return (0);
-} /*penser a free le contenu des tableaux : philo_th, fork, philo_st*/
+}

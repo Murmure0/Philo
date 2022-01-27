@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 16:10:42 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/26 14:09:02 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/01/27 10:59:09 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void *routine_one(void *data);
 unsigned int	my_get_time(void);
 unsigned int reel_time(unsigned int time);
 // int my_usleep(unsigned int time_to);
-int my_usleep(t_philo *philo_st, unsigned int time_to);
+// int my_usleep(t_philo *philo_st, unsigned int time_to);
+int my_usleep(t_philo *philo_st, unsigned int time_to, char flag);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 11:01:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/26 16:19:42 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/01/27 10:45:17 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,33 +37,13 @@ unsigned int reel_time(unsigned int start_time)
 }
 
 // int my_usleep(unsigned int time_to)
-int my_usleep(t_philo *philo_st, unsigned int time_to)
+int my_usleep(t_philo *philo_st, unsigned int time_to, char flag)
 {
-	// unsigned int tiktak;
-	// unsigned int time_to_reach;
-	// time_to_reach = time_to * 1000;
-	// tiktak = 0;
-	// while (tiktak <= time_to_reach)
-	// {
-	// 	printf("tiktak : %u, time_to : %u\n", tiktak, time_to_reach);
-	// 	usleep(500);
-	// 	tiktak +=500;
-	// }
-	unsigned int tiktak;
-	unsigned int time_to_reach;
-	
-	time_to_reach = time_to *1000;
-	tiktak = 0;
-	// printf("Time to reach : %u.\n", time_to_reach);
-	// printf("My get time = %u.\n", my_get_time());
-	// printf("start = %u.\n", philo_st->arg->start);
-	// printf("temps qui passe = %u.\n", (my_get_time() - philo_st->arg->start));
-
-	
-	while ((reel_time(philo_st->arg->start) - philo_st->last_meal) != time_to)
-	{
-		//printf("tiktak : %u, time to : %u\n", tiktak, time_to_reach);
-		usleep(500);
-	}
+	if (flag == 'e')
+		while ((reel_time(philo_st->arg->start) - philo_st->last_meal) != time_to)
+			usleep(500);
+	else if (flag == 's')
+		while ((reel_time(philo_st->arg->start) - philo_st->last_meal) - philo_st->arg->time_to_eat != time_to)
+			usleep(500);
 	return (0);
 }

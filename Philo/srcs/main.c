@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 09:20:04 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/26 17:13:32 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/01/27 10:48:13 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ int main(int argc, char **argv)
 	int i = -1;
 	while(++i < arg->nb_philo) //on initialise chaque struct de philo & on init. les mutex fork
 	{
-		philo_st[i].fork = fork; //tab des fork accessible via philo_st;
 		philo_st[i] = init_philo_st(arg, i); //init des var du tab a 0
-		if (!philo_st)
-			return (-1);
+		philo_st[i].fork = fork; //tab des fork accessible via philo_st;
 		printf("Numero du philo : %u\n", philo_st[i].num_philo);
 		if (pthread_mutex_init(fork + i, NULL)) //&str[i] == str+i mais en plus lent
 			return (-1);
@@ -63,20 +61,22 @@ int main(int argc, char **argv)
 	while (++i < arg->nb_philo)
 	{
 		if (pthread_create(philo_th + i, NULL, &routine_one, (void *)(philo_st + i)))
-			return (-1);	
-		// if (pthread_create(philo_th + i, NULL, &routine, (void *)(philo_st + i)))
-		// 	return (-1);	
+			return (-1);		
 	}
-	/*check_death = malloc(sizeof(pthread_t));
-	pthread_create(&check_death, NULL, &death, (void *)(philo_st + i));*/
+
 	i = -1;
 	while (++i < arg->nb_philo)
 		pthread_join(philo_th[i], NULL);
-	// pthread_join(check_death, NULL);
 
 	pthread_mutex_unlock(&philo_st->arg->speak);
-	/*pthread_mutex_unlock(&(philo_st->fork[num_fork_l]));
-	pthread_mutex_unlock(&(philo_st->fork[num_fork_r]));*/
+	// i = -1;
+	// while (++i < arg->nb_philo)
+	// {
+	// 	pthread_mutex_unlock(fork +i);
+	// 	pthread_mutex_destroy(fork + i);
+	// 	pthread_mutex_destroy(&(arg->speak));
+	// 	pthread_detach(philo_th[i]);
+	// }
 	/*section free*/
 	// free_all(2, arg, philo_st, philo_th);
 	/*free(arg);

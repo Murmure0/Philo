@@ -6,19 +6,19 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 09:20:04 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/27 17:00:54 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:04:07 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_arg	*arg;
-	t_philo	*philo_st;
-	pthread_mutex_t *fork;
-	pthread_t	*philo_th;
-	pthread_t	check_death;
+	t_ar			*arg;
+	t_philo			*philo_st;
+	pthread_mutex_t	*fork;
+	pthread_t		*philo_th;
+	pthread_t		check_death;
 
 	
 	arg = init_arg(argc, argv); //initialisation de la structure qui prend les arguments & check qu'ils sont ok

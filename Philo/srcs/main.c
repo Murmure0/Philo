@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 09:20:04 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/27 10:48:13 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/01/27 14:23:37 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,27 @@ int main(int argc, char **argv)
 	while (++i < arg->nb_philo)
 	{
 		if (pthread_create(philo_th + i, NULL, &routine_one, (void *)(philo_st + i)))
-			return (-1);		
+			return (-1);
+		write(1, "youpu\n", 7);
 	}
-
 	i = -1;
 	while (++i < arg->nb_philo)
-		pthread_join(philo_th[i], NULL);
+	{
+		if (pthread_join(philo_th[i], NULL))
+			write(1, "youpa\n", 7);
+	}
 
-	pthread_mutex_unlock(&philo_st->arg->speak);
-	// i = -1;
-	// while (++i < arg->nb_philo)
-	// {
-	// 	pthread_mutex_unlock(fork +i);
-	// 	pthread_mutex_destroy(fork + i);
-	// 	pthread_mutex_destroy(&(arg->speak));
-	// 	pthread_detach(philo_th[i]);
-	// }
+	
+	pthread_mutex_unlock(&arg->speak);
+	pthread_mutex_destroy(&(arg->speak));
+	i = -1;
+	while (++i < arg->nb_philo)
+	{
+		pthread_mutex_unlock(fork +i);
+		pthread_mutex_destroy(fork + i);
+		pthread_detach(philo_th[i]);
+	}
+	//pthread_detach(check_death);
 	/*section free*/
 	// free_all(2, arg, philo_st, philo_th);
 	/*free(arg);

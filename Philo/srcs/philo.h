@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 16:10:42 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/27 10:59:09 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/01/27 14:04:07 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ int free_all(int i, t_arg *arg, t_philo *philo_st, pthread_t *philo_th);
 
 /* routine */
 
-void *routine(void *data);
-int death(t_philo *philo_st);
+int routine(t_philo *philo_st);
+void *death(void *data);
+// int death(t_philo *philo_st);
 int my_printf(t_philo *philo_st, char *str);
 void *routine_one(void *data);
 

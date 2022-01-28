@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 16:10:42 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/27 17:04:08 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/01/28 14:16:26 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include <string.h>
 
 typedef struct timeval t_time;
 
@@ -52,17 +53,20 @@ t_philo			init_philo_st(t_arg *arg, int i);
 int				isnum(int n);
 unsigned int	ft_atoi(const char *str);
 int				free_all(int i, t_arg *arg, t_philo *philo_st, pthread_t *philo_th);
+size_t ft_strlen(const char *str);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+char	*ft_itoa(unsigned int n);
 
 /* routine */
 int				routine(t_philo *philo_st);
 void			*death(void *data);
 int				my_printf(t_philo *philo_st, char *str);
 void			*routine_one(void *data);
-
+void my_putstr(t_philo *philo_st, char *str_in);
 /* time */
 unsigned int	my_get_time(void);
 unsigned int	reel_time(unsigned int time);
 int				my_usleep(t_philo *philo_st, unsigned int time_to, char flag);
-
+void			ft_usleep(unsigned int time_to);
 
 #endif

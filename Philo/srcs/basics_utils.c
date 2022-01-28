@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 10:29:11 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/27 16:56:10 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/01/28 14:38:30 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,73 @@ int	isnum(int n)
 		return (0);
 	return (1);
 }
+/*
+size_t ft_strlen(const char *str)
+{
+	size_t i;
+	i = 0;
+	while (*str)
+	{
+		i++;
+	}
+	return(i);
+}
+
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
+	size_t	len_src;
+	size_t	len_dst;
+
+	i = 0;
+	len_src = ft_strlen(src);
+	len_dst = ft_strlen(dst);
+	if (dstsize - 1 < len_dst || dstsize == 0)
+		return (len_src + dstsize);
+	while (i < dstsize - len_dst - 1 && src[i])
+	{
+		dst[len_dst + i] = src[i];
+		i++;
+	}
+	dst[len_dst + i] = '\0';
+	return (len_dst + len_src);
+}
+
+
+unsigned int	ft_count(unsigned int n)
+{
+	unsigned int	i;
+
+	i = 0;
+	if (!n)
+		return (1);
+	while (n)
+	{
+		i++;
+		n /= 10;
+	}
+	return (i);
+}
+
+char	*ft_itoa(unsigned int n)
+{
+	unsigned char	*str;
+	int				j;
+
+	j = ft_count(n);
+	str = (unsigned char *)malloc(sizeof(char) * (j + 1));
+	if (!str)
+		return (NULL);
+	*(str + j) = '\0';
+	while (j-- > -1)
+	{
+		*(str + j) = (n % 10) + '0';
+		n /= 10;
+	}
+	return ((char *)str);
+}
+
+
 
 int	free_all(int i, t_arg *arg, t_philo *philo_st, pthread_t *philo_th)
 {
@@ -55,4 +122,4 @@ int	free_all(int i, t_arg *arg, t_philo *philo_st, pthread_t *philo_th)
 		free(philo_st);
 	}
 	return (0);
-}
+}*/

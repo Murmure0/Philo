@@ -6,7 +6,7 @@
 #    By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 16:11:18 by mberthet          #+#    #+#              #
-#    Updated: 2022/01/07 16:13:42 by mberthet         ###   ########.fr        #
+#    Updated: 2022/01/28 11:48:43 by mberthet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,13 @@ NAME = philo
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 MAIN = main.c \
+		routine.c \
+		basics_utils.c \
+		init.c \
+		time.c
 		
 
 SOURCES = $(MAIN)

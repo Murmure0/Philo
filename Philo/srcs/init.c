@@ -6,39 +6,13 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 10:14:46 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/27 16:52:13 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/02/06 12:03:13 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	check_arg(int argc, char **argv)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	if (argc < 5 || argc > 6)
-	{
-		printf("Wrong argument number : enter 4 or 5 numbers.\n");
-		return (-1);
-	}
-	while (argv[++i])
-	{
-		j = -1;
-		while (argv[i][++j])
-		{
-			if (!isnum(argv[i][j]))
-			{
-				printf("Wrong argument type : only positiv integer number.\n");
-				return (-1);
-			}
-		}
-	}
-	return (0);
-}
-
-void	inside_init_arg(int argc, char **argv, t_arg *arg)
+static void	inside_init_arg(int argc, char **argv, t_arg *arg)
 {
 	int		i;
 
@@ -76,28 +50,6 @@ t_arg	*init_arg(int argc, char **argv)
 	return (arg);
 }
 
-int	check_struct(t_arg *arg)
-{
-	if (arg->nb_philo == 0 || arg->nb_philo > 200)
-	{
-		printf("Number of philosophers must be between 1 and 200.\n");
-		return (-1);
-	}
-	if (arg->time_to_die > 10000 || arg->time_to_eat > 10000
-		|| arg->time_to_sleep > 10000)
-	{
-		printf("Please enter a correct amount of time.\n");
-		return (-1);
-	}
-	else if (arg->time_to_die < 60 || arg->time_to_eat < 60
-		|| arg->time_to_sleep < 60)
-	{
-		printf("You're trying to test under 60ms, dont't do that please.\n");
-		return (-1);
-	}
-	return (0);
-}
-
 t_philo	init_philo_st(t_arg *arg, int i)
 {
 	t_philo	philo_st;
@@ -108,4 +60,35 @@ t_philo	init_philo_st(t_arg *arg, int i)
 	philo_st.nb_meal = 0;
 	philo_st.nb_meal_ok = 0;
 	return (philo_st);
+}
+
+int	ft_init_arg_and_check(t_arg **arg, int argc, char **argv)
+{
+	*arg = init_arg(argc, argv);
+	if (!(*arg))
+		return (-1);
+	if (check_arg(argc, argv) || check_struct(*arg))
+	{
+		free_all(0, *arg, NULL, NULL);
+		return (-1);
+	}
+	return (0);
+}
+
+int	ft_creat_philost_and_fork(t_philo **philo_st, pthread_mutex_t **fork,
+	t_arg **arg)
+{
+	*philo_st = malloc(sizeof(t_philo) * (*arg)->nb_philo);
+	if (!(*philo_st))
+	{
+		free_all(0, (*arg), (*philo_st), NULL);
+		return (-1);
+	}
+	*fork = malloc(sizeof(pthread_mutex_t) * (*arg)->nb_philo);
+	if (!(*fork))
+	{
+		free_all(1, (*arg), (*philo_st), NULL);
+		return (-1);
+	}
+	return (0);
 }

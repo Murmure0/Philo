@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 11:01:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/28 15:51:19 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/02/06 12:03:15 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ unsigned int	my_get_time(void)
 	return (time);
 }
 
-unsigned int	reel_time(unsigned int start_time)
+unsigned int	real_time(unsigned int start_time)
 {
 	unsigned int	timestamp;
 	unsigned int	timenow;
@@ -35,27 +35,16 @@ unsigned int	reel_time(unsigned int start_time)
 	return (timestamp);
 }
 
-// int	my_usleep(t_philo *philo_st, unsigned int time_to, char flag)
-// {
-
-
-// 	if (flag == 'e')
-// 		while ((reel_time(philo_st->arg->start) - philo_st->last_meal)
-// 			<= time_to)
-// 			usleep(50);
-// 	else if (flag == 's')
-// 		while ((reel_time(philo_st->arg->start) - philo_st->last_meal)
-// 			- philo_st->arg->time_to_eat <= time_to)
-// 			usleep(50);
-// 	return (0);
-// }
-
-void	ft_usleep(unsigned int time_to)
+void	ft_usleep(t_philo *philo_st, unsigned int time_to)
 {
 	unsigned int	start_time;
 
 	start_time = 0;
 	start_time = my_get_time();
 	while ((my_get_time() - start_time) < time_to)
+	{
+		if (philo_st->arg->dead_philo)
+			break ;
 		usleep(500);
+	}
 }

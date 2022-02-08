@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+         #
+#    By: maelle <maelle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 16:11:18 by mberthet          #+#    #+#              #
-#    Updated: 2022/02/06 12:03:09 by mberthet         ###   ########.fr        #
+#    Updated: 2022/02/08 10:06:49 by maelle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,18 +15,17 @@ NAME = philo
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -pthread
 
-MAIN = main.c \
-		routine.c \
-		routine_two.c \
-		basics_utils.c \
-		init.c \
-		time.c \
-		process.c \
-		check.c
+MAIN = srcs/main.c \
+		srcs/routine.c \
+		srcs/routine_utils.c \
+		srcs/basics_utils.c \
+		srcs/init.c \
+		srcs/time.c \
+		srcs/process.c \
+		srcs/check.c
 		
-
 SOURCES = $(MAIN)
 
 OBJECTS = $(SOURCES:.c=.o)
@@ -35,7 +34,7 @@ HEADER = philo.h
 
 all : $(NAME)
 
-$(NAME): $(OBJECTS) $(HEADER)
+$(NAME): $(OBJECTS)
 			@$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 
 clean:

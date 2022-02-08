@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
+/*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 16:10:42 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/06 12:03:07 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/02/08 10:46:45 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,13 @@ int				ft_creat_philo_th(t_philo **philo_st, t_arg **arg,
 t_arg			*init_arg(int argc, char **argv);
 t_philo			init_philo_st(t_arg *arg, int i);
 int				ft_init_arg_and_check(t_arg **arg, int argc, char **argv);
-int				ft_creat_philost_and_fork(t_philo **philo_st,
+int				ft_creat_philo_st_and_fork(t_philo **philo_st,
 					pthread_mutex_t **fork, t_arg **arg);
 
 /* process */
 int				ft_join_pthread(pthread_t *philo_th, t_arg *arg,
 					pthread_mutex_t *fork, t_philo *philo_st);
-int				ft_pth_creat_even(t_arg *arg, pthread_t *philo_th,
-					t_philo *philo_st);
-int				ft_pth_creat_uneven(t_arg *arg, pthread_t *philo_th,
+int				ft_pth_creat_philo(t_arg *arg, pthread_t *philo_th,
 					t_philo *philo_st);
 
 /* basics utils */
@@ -71,8 +69,8 @@ unsigned int	ft_atoi(const char *str);
 int				isnum(int n);
 void			ft_clean(t_arg *arg, t_philo *philo_st, pthread_mutex_t *fork,
 					pthread_t *philo_th);
-int				free_all(int i, t_arg *arg, t_philo *philo_st,
-					pthread_mutex_t *fork);
+int				free_all(t_arg *arg, t_philo *philo_st,
+					pthread_mutex_t *fork, pthread_t *philo_th);
 
 /* routine */
 int				philo_eat(t_philo *philo_st);
@@ -81,7 +79,7 @@ int				philo_think(t_philo *philo_st);
 int				routine(t_philo *philo_st);
 void			*routine_one(void *data);
 
-/* routine two */
+/* routine utils */
 void			dead_unlock_fork(t_philo *philo_st);
 void			unlock_fork(t_philo *philo_st);
 void			*death(void *data);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   routine_two.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
+/*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:32:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/06 12:03:20 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/02/08 09:56:29 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 void	dead_unlock_fork(t_philo *philo_st)
 {

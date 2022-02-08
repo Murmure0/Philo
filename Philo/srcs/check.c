@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
+/*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:19:41 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/06 11:10:24 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/02/08 10:32:02 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 int	check_arg(int argc, char **argv)
 {
@@ -46,13 +46,8 @@ int	check_struct(t_arg *arg)
 		return (-1);
 	}
 	if (arg->time_to_die > 2147483647 || arg->time_to_eat > 2147483647
-		|| arg->time_to_sleep > 2147483647)
-	{
-		printf("Please enter a correct amount of time.\n");
-		return (-1);
-	}
-	else if (arg->time_to_die < 60 || arg->time_to_eat < 60
-		|| arg->time_to_sleep < 60)
+		|| arg->time_to_sleep > 2147483647 || arg->time_to_die < 60 
+		|| arg->time_to_eat < 60 || arg->time_to_sleep < 60)
 	{
 		printf("Please enter a correct amount of time.\n");
 		return (-1);
@@ -72,7 +67,7 @@ int	ft_init_philost_mutex(t_philo **philo_st, t_arg **arg,
 		(*philo_st)[i].fork = (*fork);
 		if (pthread_mutex_init((*fork) + i, NULL))
 		{
-			free_all(2, (*arg), (*philo_st), (*fork));
+			free_all((*arg), (*philo_st), (*fork), NULL);
 			return (-1);
 		}
 	}
@@ -85,7 +80,7 @@ int	ft_creat_philo_th(t_philo **philo_st, t_arg **arg, pthread_mutex_t **fork,
 	(*philo_th) = malloc(sizeof(pthread_t) * (*arg)->nb_philo);
 	if (!(*philo_th))
 	{
-		free_all(2, (*arg), (*philo_st), (*fork));
+		free_all((*arg), (*philo_st), (*fork), NULL);
 		return (-1);
 	}
 	return (0);

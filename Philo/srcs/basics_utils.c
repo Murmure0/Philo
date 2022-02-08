@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   basics_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
+/*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 10:29:11 by mberthet          #+#    #+#             */
-/*   Updated: 2022/01/31 17:24:18 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/02/08 10:34:22 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 unsigned int	ft_atoi(const char *str)
 {
@@ -54,24 +54,14 @@ void	ft_clean(t_arg *arg, t_philo *philo_st, pthread_mutex_t *fork,
 		pthread_mutex_destroy(fork + i);
 		pthread_detach(philo_th[i]);
 	}
-	free_all(2, arg, philo_st, fork);
-	free(philo_th);
+	free_all(arg, philo_st, fork, philo_th);
 }
 
-int	free_all(int i, t_arg *arg, t_philo *philo_st, pthread_mutex_t *fork)
+int	free_all(t_arg *arg, t_philo *philo_st, pthread_mutex_t *fork, pthread_t *philo_th)
 {
-	if (i == 0)
-		free(arg);
-	else if (i == 1)
-	{
-		free(arg);
-		free(philo_st);
-	}
-	else if (i == 2)
-	{
-		free(arg);
-		free(philo_st);
-		free(fork);
-	}
+	free(arg);
+	free(philo_st);
+	free(fork);
+	free(philo_th);
 	return (0);
 }

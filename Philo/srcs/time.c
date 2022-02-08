@@ -3,24 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
+/*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 11:01:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/06 12:03:15 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/02/08 10:08:02 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 unsigned int	my_get_time(void)
 {
-	unsigned int	time;
 	t_time			t;
 
-	time = 0;
 	gettimeofday(&t, NULL);
-	time = t.tv_sec * 1000 + t.tv_usec / 1000;
-	return (time);
+	return (t.tv_sec * 1000 + t.tv_usec / 1000);
 }
 
 unsigned int	real_time(unsigned int start_time)

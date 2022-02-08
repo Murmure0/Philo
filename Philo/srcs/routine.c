@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
+/*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:36:14 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/06 12:03:18 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:43:39 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 int	philo_eat(t_philo *philo_st)
 {
@@ -18,7 +18,10 @@ int	philo_eat(t_philo *philo_st)
 	int	num_fork_l;
 
 	num_fork_r = (philo_st->num_philo) % (philo_st->arg->nb_philo);
-	num_fork_l = (philo_st->num_philo) - 1;
+	if (philo_st->num_philo == 1)
+		num_fork_l = (philo_st->arg->nb_philo);
+	else
+		num_fork_l = (philo_st->num_philo) - 1;
 	if (take_fork_eat(num_fork_r, num_fork_l, philo_st) < 0)
 		return (-1);
 	if (philo_st->arg->nb_meal && philo_st->nb_meal_ok == 0)
@@ -68,7 +71,7 @@ void	*routine_one(void *data)
 
 	philo_st = (t_philo *)data;
 	if (philo_st->num_philo % 2 != 0)
-		usleep(500);
+		usleep(800);
 	if (pthread_create(&check_death, NULL, &death, (void *)(philo_st)))
 		return (NULL);
 	while (1)

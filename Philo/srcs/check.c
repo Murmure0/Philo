@@ -6,7 +6,7 @@
 /*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:19:41 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/08 10:32:02 by maelle           ###   ########.fr       */
+/*   Updated: 2022/02/12 12:19:13 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,17 @@ int	check_struct(t_arg *arg)
 	return (0);
 }
 
+void	destroy_fork(int i, pthread_mutex_t **fork)
+{
+	int	j;
+
+	j = -1;
+	while (++j < i)
+	{
+		pthread_mutex_destroy((*fork) + j);
+	}
+}
+
 int	ft_init_philost_mutex(t_philo **philo_st, t_arg **arg,
 	pthread_mutex_t **fork)
 {
@@ -67,6 +78,8 @@ int	ft_init_philost_mutex(t_philo **philo_st, t_arg **arg,
 		(*philo_st)[i].fork = (*fork);
 		if (pthread_mutex_init((*fork) + i, NULL))
 		{
+			destroy_fork(i, &(*fork));
+			pthread_mutex_destroy(&(*arg)->speak);
 			free_all((*arg), (*philo_st), (*fork), NULL);
 			return (-1);
 		}
@@ -80,6 +93,8 @@ int	ft_creat_philo_th(t_philo **philo_st, t_arg **arg, pthread_mutex_t **fork,
 	(*philo_th) = malloc(sizeof(pthread_t) * (*arg)->nb_philo);
 	if (!(*philo_th))
 	{
+		destroy_fork(((*arg)->nb_philo), &(*fork));
+		pthread_mutex_destroy(&(*arg)->speak);
 		free_all((*arg), (*philo_st), (*fork), NULL);
 		return (-1);
 	}

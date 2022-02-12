@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine_two.c                                      :+:      :+:    :+:   */
+/*   routine_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:32:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/08 09:56:29 by maelle           ###   ########.fr       */
+/*   Updated: 2022/02/12 11:38:47 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,10 @@ int	take_fork_eat(int num_fork_r, int num_fork_l, t_philo *philo_st)
 		philo_st->arg->dead_philo = philo_st->num_philo;
 		return (-1);
 	}
-	if (pthread_mutex_lock(philo_st->fork + num_fork_l))
-		return (-1);
+	pthread_mutex_lock(philo_st->fork + num_fork_l);
 	if (my_printf(philo_st, "has taken a fork") < 0)
 		return (-1);
-	if (pthread_mutex_lock(philo_st->fork + num_fork_r))
-		return (-1);
+	pthread_mutex_lock(philo_st->fork + num_fork_r);
 	if (my_printf(philo_st, "has taken a fork") < 0)
 		return (-1);
 	philo_st->last_meal = real_time(philo_st->arg->start);

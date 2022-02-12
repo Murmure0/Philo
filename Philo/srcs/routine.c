@@ -6,7 +6,7 @@
 /*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:36:14 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/08 11:43:39 by maelle           ###   ########.fr       */
+/*   Updated: 2022/02/12 12:19:01 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,11 @@ void	*routine_one(void *data)
 	pthread_t	check_death;
 
 	philo_st = (t_philo *)data;
-	if (philo_st->num_philo % 2 != 0)
-		usleep(800);
 	if (pthread_create(&check_death, NULL, &death, (void *)(philo_st)))
 		return (NULL);
 	while (1)
 		if (routine(philo_st))
 			break ;
-	pthread_join(check_death, NULL);
 	pthread_detach(check_death);
 	return (NULL);
 }

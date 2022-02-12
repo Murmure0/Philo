@@ -6,7 +6,7 @@
 /*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 10:14:46 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/08 11:32:25 by maelle           ###   ########.fr       */
+/*   Updated: 2022/02/12 11:19:42 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ t_arg	*init_arg(int argc, char **argv)
 	arg->nb_meal_ok = 0;
 	arg->dead_philo = 0;
 	if (pthread_mutex_init(&(arg->speak), NULL))
+	{
+		free(arg);
 		return (NULL);
+	}
 	return (arg);
 }
 
@@ -59,6 +62,7 @@ int	ft_init_arg_and_check(t_arg **arg, int argc, char **argv)
 		return (-1);
 	if (check_arg(argc, argv) || check_struct(*arg))
 	{
+		pthread_mutex_destroy(&(*arg)->speak);
 		free_all(*arg, NULL, NULL, NULL);
 		return (-1);
 	}
@@ -71,12 +75,14 @@ int	ft_creat_philo_st_and_fork(t_philo **philo_st, pthread_mutex_t **fork,
 	*philo_st = malloc(sizeof(t_philo) * (*arg)->nb_philo);
 	if (!(*philo_st))
 	{
-		free_all((*arg), (*philo_st), NULL, NULL);
+		pthread_mutex_destroy(&(*arg)->speak);
+		free_all((*arg), NULL, NULL, NULL);
 		return (-1);
 	}
 	*fork = malloc(sizeof(pthread_mutex_t) * (*arg)->nb_philo);
 	if (!(*fork))
 	{
+		pthread_mutex_destroy(&(*arg)->speak);
 		free_all((*arg), (*philo_st), NULL, NULL);
 		return (-1);
 	}

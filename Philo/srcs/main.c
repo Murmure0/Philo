@@ -6,7 +6,7 @@
 /*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 09:20:04 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/08 10:52:45 by maelle           ###   ########.fr       */
+/*   Updated: 2022/02/12 12:19:11 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	main(int argc, char **argv)
 		ft_clean(arg, philo_st, fork, philo_th);
 		return (-1);
 	}
-	else if (ft_join_pthread(philo_th, arg, fork, philo_st))
-		return (-1);
+	ft_join_pthread(philo_th, arg, fork, philo_st);
 	ft_clean(arg, philo_st, fork, philo_th);
 	return (0);
 }

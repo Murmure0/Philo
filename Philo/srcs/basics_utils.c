@@ -6,7 +6,7 @@
 /*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 10:29:11 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/08 10:34:22 by maelle           ###   ########.fr       */
+/*   Updated: 2022/02/12 12:18:13 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	ft_clean(t_arg *arg, t_philo *philo_st, pthread_mutex_t *fork,
 		pthread_t *philo_th)
 {
 	unsigned int	i;
-
 	pthread_mutex_unlock(&arg->speak);
 	pthread_mutex_destroy(&(arg->speak));
 	i = -1;
@@ -52,7 +51,6 @@ void	ft_clean(t_arg *arg, t_philo *philo_st, pthread_mutex_t *fork,
 	{
 		pthread_mutex_unlock(fork + i);
 		pthread_mutex_destroy(fork + i);
-		pthread_detach(philo_th[i]);
 	}
 	free_all(arg, philo_st, fork, philo_th);
 }

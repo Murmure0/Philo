@@ -6,7 +6,7 @@
 /*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:36:14 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/12 12:19:01 by maelle           ###   ########.fr       */
+/*   Updated: 2022/02/12 13:25:09 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ int	philo_eat(t_philo *philo_st)
 	int	num_fork_l;
 
 	num_fork_r = (philo_st->num_philo) % (philo_st->arg->nb_philo);
-	if (philo_st->num_philo == 1)
-		num_fork_l = (philo_st->arg->nb_philo);
-	else
-		num_fork_l = (philo_st->num_philo) - 1;
+	num_fork_l = (philo_st->num_philo) - 1;
 	if (take_fork_eat(num_fork_r, num_fork_l, philo_st) < 0)
 		return (-1);
 	if (philo_st->arg->nb_meal && philo_st->nb_meal_ok == 0)

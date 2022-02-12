@@ -6,7 +6,7 @@
 /*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 10:14:46 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/12 11:19:42 by maelle           ###   ########.fr       */
+/*   Updated: 2022/02/12 13:45:42 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ t_philo	init_philo_st(t_arg *arg, int i)
 
 int	ft_init_arg_and_check(t_arg **arg, int argc, char **argv)
 {
+	if (check_arg(argc, argv))
+		return -1;
 	*arg = init_arg(argc, argv);
 	if (!(*arg))
 		return (-1);
-	if (check_arg(argc, argv) || check_struct(*arg))
+	if (check_struct(*arg))
 	{
 		pthread_mutex_destroy(&(*arg)->speak);
 		free_all(*arg, NULL, NULL, NULL);

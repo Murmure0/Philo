@@ -6,7 +6,7 @@
 /*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:23:15 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/12 12:19:07 by maelle           ###   ########.fr       */
+/*   Updated: 2022/02/12 13:29:23 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	ft_pth_creat_philo(t_arg *arg, pthread_t *philo_th, t_philo *philo_st)
 		i += 2;
 	}
 	i = 1;
+	usleep(500);
 	while (i < arg->nb_philo)
 	{
 		if (pthread_create(philo_th + i, NULL, &routine_one,

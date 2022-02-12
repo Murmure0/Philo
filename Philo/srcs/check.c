@@ -6,7 +6,7 @@
 /*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:19:41 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/12 12:19:13 by maelle           ###   ########.fr       */
+/*   Updated: 2022/02/12 13:37:08 by maelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	check_arg(int argc, char **argv)
 	int	j;
 
 	i = 0;
+	
 	if (argc < 5 || argc > 6)
 	{
 		printf("Wrong argument number : enter 4 or 5 numbers.\n");

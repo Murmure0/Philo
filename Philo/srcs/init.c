@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 10:14:46 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/12 13:45:42 by maelle           ###   ########.fr       */
+/*   Updated: 2022/03/04 16:21:29 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ t_arg	*init_arg(int argc, char **argv)
 	arg->start = my_get_time();
 	arg->nb_meal_ok = 0;
 	arg->dead_philo = 0;
-	if (pthread_mutex_init(&(arg->speak), NULL))
+	if (pthread_mutex_init(&(arg->speak), NULL)
+		|| pthread_mutex_init(&(arg->death), NULL))
 	{
 		free(arg);
 		return (NULL);

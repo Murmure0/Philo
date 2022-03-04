@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:19:41 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/12 13:37:08 by maelle           ###   ########.fr       */
+/*   Updated: 2022/03/04 16:22:13 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ int	ft_init_philost_mutex(t_philo **philo_st, t_arg **arg,
 	while (++i < (*arg)->nb_philo)
 	{
 		(*philo_st)[i] = init_philo_st((*arg), i);
+		if (pthread_mutex_init(&((*philo_st)->meal), NULL))
+		{
+			pthread_mutex_destroy(&(*arg)->speak);
+			free_all((*arg), (*philo_st), (*fork), NULL);
+			return (-1);
+		}
 		(*philo_st)[i].fork = (*fork);
 		if (pthread_mutex_init((*fork) + i, NULL))
 		{

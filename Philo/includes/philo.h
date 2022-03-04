@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maelle <maelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 16:10:42 by mberthet          #+#    #+#             */
-/*   Updated: 2022/02/08 10:46:45 by maelle           ###   ########.fr       */
+/*   Updated: 2022/03/04 16:20:38 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_arg{
 	unsigned int	nb_meal_ok;
 	unsigned int	dead_philo;
 	pthread_mutex_t	speak;
+	pthread_mutex_t	death;
 }				t_arg;
 
 typedef struct s_philo{
@@ -40,6 +41,7 @@ typedef struct s_philo{
 	unsigned int	last_meal;
 	unsigned int	nb_meal;
 	unsigned int	nb_meal_ok;
+	pthread_mutex_t	meal;
 	pthread_mutex_t	*fork;
 }				t_philo;
 
@@ -71,6 +73,7 @@ void			ft_clean(t_arg *arg, t_philo *philo_st, pthread_mutex_t *fork,
 					pthread_t *philo_th);
 int				free_all(t_arg *arg, t_philo *philo_st,
 					pthread_mutex_t *fork, pthread_t *philo_th);
+int				check_last_meal(t_philo *philo_st);
 
 /* routine */
 int				philo_eat(t_philo *philo_st);
@@ -80,12 +83,15 @@ int				routine(t_philo *philo_st);
 void			*routine_one(void *data);
 
 /* routine utils */
-void			dead_unlock_fork(t_philo *philo_st);
 void			unlock_fork(t_philo *philo_st);
-void			*death(void *data);
 int				my_printf(t_philo *philo_st, char *str);
 int				take_fork_eat(int num_fork_r, int num_fork_l,
 					t_philo *philo_st);
+
+/* routine utils death */
+int	check_death(t_philo *philo_st);
+void			*death(void *data);
+void			dead_unlock_fork(t_philo *philo_st);
 
 /* time */
 unsigned int	my_get_time(void);

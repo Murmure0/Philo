@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 09:20:04 by mberthet          #+#    #+#             */
-/*   Updated: 2022/03/04 16:28:39 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/03/05 11:21:08 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int	main(int argc, char **argv)
 	}
 	ft_join_pthread(philo_th, arg, fork, philo_st);
 	ft_clean(arg, philo_st, fork, philo_th);
-	system("leaks philo");
+	// system("leaks philo");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:36:14 by mberthet          #+#    #+#             */
-/*   Updated: 2022/03/04 16:21:51 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/03/05 12:18:15 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ void	*routine_one(void *data)
 	while (1)
 		if (routine(philo_st))
 			break ;
-	pthread_detach(check_death);
+	pthread_join(check_death, NULL);
 	return (NULL);
 }

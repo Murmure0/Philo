@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:19:41 by mberthet          #+#    #+#             */
-/*   Updated: 2022/03/04 16:22:13 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/03/05 11:36:01 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_init_philost_mutex(t_philo **philo_st, t_arg **arg,
 	while (++i < (*arg)->nb_philo)
 	{
 		(*philo_st)[i] = init_philo_st((*arg), i);
-		if (pthread_mutex_init(&((*philo_st)->meal), NULL))
+		if (pthread_mutex_init(&(((*philo_st)[i]).meal), NULL))
 		{
 			pthread_mutex_destroy(&(*arg)->speak);
 			free_all((*arg), (*philo_st), (*fork), NULL);
@@ -85,7 +85,7 @@ int	ft_init_philost_mutex(t_philo **philo_st, t_arg **arg,
 		(*philo_st)[i].fork = (*fork);
 		if (pthread_mutex_init((*fork) + i, NULL))
 		{
-			destroy_fork(i, &(*fork));
+			destroy_fork(i, fork);
 			pthread_mutex_destroy(&(*arg)->speak);
 			free_all((*arg), (*philo_st), (*fork), NULL);
 			return (-1);

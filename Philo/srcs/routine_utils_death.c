@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 14:39:58 by mberthet          #+#    #+#             */
-/*   Updated: 2022/03/04 16:25:14 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/03/05 12:18:19 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*death(void *data)
 	philo_st = (t_philo *)data;
 	while (1)
 	{
-		usleep(1000);
+		ft_usleep(philo_st, 2);
 		if (philo_st->arg->time_to_die < (real_time(philo_st->arg->start)
 				- check_last_meal(philo_st))
 				|| check_death(philo_st)
